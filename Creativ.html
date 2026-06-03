@@ -1,0 +1,1325 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Creative Web Design Portfolio</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: radial-gradient(circle at top, #1e3a8a, #020617 70%);
+      animation: bgMove 10s infinite alternate;
+      background: #0f172a;
+      color: white;
+      overflow-x: hidden;
+    }
+
+    header {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      text-align: center;
+      background: linear-gradient(135deg, #1e293b, #0f172a);
+      position: relative;
+    }
+
+    h1 {
+      font-size: 4rem;
+      color: #38bdf8;
+      animation: glow 2s infinite alternate;
+    }
+
+    p {
+      margin-top: 15px;
+      font-size: 1.2rem;
+      color: #cbd5e1;
+    }
+
+    .btn {
+      margin-top: 30px;
+      padding: 14px 30px;
+      background: #38bdf8;
+      border: none;
+      border-radius: 30px;
+      color: black;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      transform: scale(1.1);
+      background: white;
+    }
+
+    section {
+      padding: 100px 10%;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin-top: 40px;
+    }
+
+    .card {
+      background: #1e293b;
+      padding: 30px;
+      border-radius: 20px;
+      transition: 0.4s;
+      box-shadow: 0 0 20px rgba(56,189,248,0.2);
+    }
+
+    .card:hover {
+      transform: translateY(-10px) rotate(1deg);
+      box-shadow: 0 0 30px rgba(56,189,248,0.6);
+    }
+
+    footer {
+      text-align: center;
+      padding: 50px 20px;
+      background: #020617;
+    }
+
+    .contact {
+      margin-top: 20px;
+      font-size: 1.1rem;
+      line-height: 2;
+    }
+
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
+
+    @keyframes bgMove {
+      from {
+        background-position: left;
+      }
+      to {
+        background-position: right;
+      }
+    }
+
+    @keyframes spin {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    @media (max-width: 900px) {
+
+      nav {
+        flex-direction: column;
+        gap: 20px;
+        padding: 20px;
+      }
+
+      nav div {
+        justify-content: center;
+      }
+
+      header {
+        padding: 120px 20px;
+        height: auto;
+      }
+
+      h1 {
+        font-size: 2.5rem;
+      }
+
+      section {
+        padding: 70px 20px;
+      }
+
+      .cards {
+        grid-template-columns: 1fr;
+      }
+
+      .card {
+        width: 100%;
+      }
+
+      img {
+        max-width: 100%;
+      }
+
+    }
+
+    @media (max-width: 600px) {
+
+      nav h1 {
+        font-size: 1.5rem;
+      }
+
+      nav div {
+        gap: 15px;
+      }
+
+      nav a {
+        font-size: 0.9rem !important;
+      }
+
+      h1 {
+        font-size: 2rem;
+      }
+
+      p {
+        font-size: 1rem;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+    }
+
+    @keyframes glow {
+      from {
+        text-shadow: 0 0 10px #38bdf8;
+      }
+      to {
+        text-shadow: 0 0 30px #38bdf8, 0 0 50px #38bdf8;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<nav id="navbar" style="position:fixed;top:0;left:0;width:100%;padding:20px 8%;display:flex;justify-content:space-between;align-items:center;background:rgba(15,23,42,0.7);backdrop-filter:blur(15px);z-index:1000;border-bottom:1px solid rgba(56,189,248,0.2);box-shadow:0 0 20px rgba(56,189,248,0.2);transition:0.5s;">
+
+  <h1 style="font-size:2rem;color:#38bdf8;text-shadow:0 0 20px #38bdf8;">
+    Jonibek
+  </h1>
+
+  <div style="display:flex;gap:30px;flex-wrap:wrap;align-items:center;">
+    <a href="#top" onclick="scrollToTop()" style="color:white;text-decoration:none;font-size:1.1rem;transition:0.4s;" onmouseover="this.style.color='#38bdf8'" onmouseout="this.style.color='white'">Bosh Sahifa</a>
+
+    <a href="#about" style="color:white;text-decoration:none;font-size:1.1rem;transition:0.4s;" onmouseover="this.style.color='#38bdf8'" onmouseout="this.style.color='white'">Men Haqimda</a>
+
+    <a href="#skills" style="color:white;text-decoration:none;font-size:1.1rem;transition:0.4s;" onmouseover="this.style.color='#38bdf8'" onmouseout="this.style.color='white'">Ko'nikmalar</a>
+
+    <a href="#social" style="color:white;text-decoration:none;font-size:1.1rem;transition:0.4s;" onmouseover="this.style.color='#38bdf8'" onmouseout="this.style.color='white'">Ijtimoiy Tarmoqlar</a>
+
+    <a href="#contact" style="padding:12px 25px;background:#38bdf8;color:black;border-radius:30px;text-decoration:none;font-weight:bold;box-shadow:0 0 20px #38bdf8;transition:0.4s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+      Aloqa
+    </a>
+  </div>
+
+</nav>
+
+<canvas id="bg"></canvas>
+
+<header>
+  <h1>Creative Web Design</h1>
+  <p>Portfolio | JavaScript Developer | Zamonaviy Dizayn</p>
+  <div style="margin-top:30px;display:flex;justify-content:center;align-items:center;gap:50px;flex-wrap:wrap;">
+
+    <div style="position:relative;width:260px;height:260px;border-radius:50%;padding:8px;background:linear-gradient(45deg,#38bdf8,#0ea5e9,#7dd3fc);animation:spin 20s linear infinite;box-shadow:0 0 60px rgba(56,189,248,0.7);">
+      <div style="width:100%;height:100%;border-radius:50%;overflow:hidden;background:#0f172a;display:flex;align-items:center;justify-content:center;">
+        <img src="./photo_5224305297696954066_y.jpg" alt="profile" style="width:100%;height:100%;object-fit:cover;">
+      </div>
+
+      <div style="position:absolute;bottom:10px;right:10px;width:30px;height:30px;background:#22c55e;border-radius:50%;box-shadow:0 0 20px #22c55e;"></div>
+    </div>
+
+    <div style="width:180px;height:180px;border:6px solid #38bdf8;border-radius:50%;display:flex;align-items:center;justify-content:center;animation:spin 4s linear infinite;box-shadow:0 0 40px #38bdf8;">
+    <div style="width:120px;height:120px;background:#38bdf8;border-radius:50%;display:flex;align-items:center;justify-content:center;color:black;font-weight:bold;font-size:1.2rem;">
+      Creativ web designer
+    </div>
+  </div>
+
+  </div>
+
+  <div style="margin-top:30px;display:flex;gap:20px;flex-wrap:wrap;justify-content:center;">
+    <div style="padding:15px 30px;background:rgba(56,189,248,0.1);border:1px solid #38bdf8;border-radius:20px;backdrop-filter:blur(10px);box-shadow:0 0 20px rgba(56,189,248,0.3);">
+      ⚡ Full Stack Dasturchi
+    </div>
+
+    <div style="padding:15px 30px;background:rgba(56,189,248,0.1);border:1px solid #38bdf8;border-radius:20px;backdrop-filter:blur(10px);box-shadow:0 0 20px rgba(56,189,248,0.3);">
+      🚀 AI va Web Mutaxassis
+    </div>
+
+    <div style="padding:15px 30px;background:rgba(56,189,248,0.1);border:1px solid #38bdf8;border-radius:20px;backdrop-filter:blur(10px);box-shadow:0 0 20px rgba(56,189,248,0.3);">
+      🎨 Kreativ UI Dizayner
+    </div>
+  </div>
+
+  <button class="btn" onclick="scrollToSection()">Portfolio Ko'rish</button>
+</header>
+
+<section>
+  <h2 style="font-size:2.5rem;color:#38bdf8;">Mening Ishlarim</h2>
+
+  <div class="cards">
+    <div class="card">
+      <h3>Landing Page</h3>
+      <p>Creative va zamonaviy landing page dizaynlar.</p>
+    </div>
+
+    <div class="card">
+      <h3>Portfolio Website</h3>
+      <p>Animatsiyali va professional portfolio saytlar.</p>
+    </div>
+
+    <div class="card">
+      <h3>JavaScript Effektlar</h3>
+      <p>100% JavaScript animatsiya va interaktiv effektlar.</p>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <h2 style="font-size:2.5rem;color:#38bdf8;text-align:center;">Men Haqimda</h2>
+
+  <div class="card" style="margin-top:40px;line-height:2;font-size:1.1rem;position:relative;overflow:hidden;">
+
+    <div style="position:absolute;top:-50px;right:-50px;width:200px;height:200px;background:rgba(56,189,248,0.15);border-radius:50%;filter:blur(20px);"></div>
+
+    <h1 style="font-size:3rem;color:#38bdf8;margin-bottom:20px;animation:glow 2s infinite alternate;">
+      Kreativ Dasturchi
+    </h1>
+
+    <p style="font-size:1.2rem;color:#e2e8f0;">
+      Men professional <span style="color:#38bdf8;font-weight:bold;">web developer</span> va creative designer sifatida 
+      <span style="color:#38bdf8;font-weight:bold;">15 yillik tajribaga</span> egaman.
+      Zamonaviy va kuchli web saytlar yaratish bo‘yicha faoliyat yuritaman.
+    </p>
+
+    <br>
+
+    <p style="color:#cbd5e1;">
+      Shu vaqt davomida <span style="color:#38bdf8;font-size:1.5rem;font-weight:bold;">76+</span> mijozlar bilan ishlaganman va ko‘plab premium portfolio, landing page hamda biznes saytlar yaratganman.
+    </p>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;margin-top:40px;">
+
+      <div style="background:#0f172a;padding:25px;border-radius:20px;box-shadow:0 0 20px rgba(56,189,248,0.3);transition:0.5s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+        <h3 style="font-size:2rem;">🎨</h3>
+        <h3 style="color:#38bdf8;margin-top:10px;">Creative Dizayn</h3>
+        <p style="margin-top:10px;color:#cbd5e1;">Zamonaviy va premium web interface yaratish.</p>
+      </div>
+
+      <div style="background:#0f172a;padding:25px;border-radius:20px;box-shadow:0 0 20px rgba(56,189,248,0.3);transition:0.5s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+        <h3 style="font-size:2rem;">⚡</h3>
+        <h3 style="color:#38bdf8;margin-top:10px;">JavaScript Effects</h3>
+        <p style="margin-top:10px;color:#cbd5e1;">100% interaktiv animatsiyalar va effektlar.</p>
+      </div>
+
+      <div style="background:#0f172a;padding:25px;border-radius:20px;box-shadow:0 0 20px rgba(56,189,248,0.3);transition:0.5s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+        <h3 style="font-size:2rem;">📱</h3>
+        <h3 style="color:#38bdf8;margin-top:10px;">Moslashuvchan Dizayn</h3>
+        <p style="margin-top:10px;color:#cbd5e1;">Telefon va kompyuter uchun moslashuvchan sayt.</p>
+      </div>
+
+      <div style="background:#0f172a;padding:25px;border-radius:20px;box-shadow:0 0 20px rgba(56,189,248,0.3);transition:0.5s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+        <h3 style="font-size:2rem;">🚀</h3>
+        <h3 style="color:#38bdf8;margin-top:10px;">SEO & Speed</h3>
+        <p style="margin-top:10px;color:#cbd5e1;">Tez yuklanadigan va SEO friendly structure.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2 style="font-size:2.5rem;color:#38bdf8;">Statistika</h2>
+
+  <div class="cards">
+    <div class="card">
+      <h1 style="font-size:4rem;color:#38bdf8;">76+</h1>
+      <p>Mijozlar</p>
+    </div>
+
+    <div class="card">
+      <h1 style="font-size:4rem;color:#38bdf8;">17+</h1>
+      <p>Yillik Tajriba</p>
+    </div>
+
+    <div class="card">
+      <h1 style="font-size:4rem;color:#38bdf8;">100%</h1>
+      <p>JavaScript Creative</p>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <h2 style="font-size:2.8rem;color:#38bdf8;text-align:center;text-shadow:0 0 20px #38bdf8;">Texnologiyalar & Ko'nikmalar</h2>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:25px;margin-top:60px;">
+
+    <div class="card" style="text-align:center;background:linear-gradient(145deg,#0f172a,#1e293b);">
+      <h1 style="font-size:3rem;">🐍</h1>
+      <h3 style="color:#38bdf8;">Python</h3>
+    </div>
+
+    <div class="card" style="text-align:center;background:linear-gradient(145deg,#0f172a,#1e293b);">
+      <h1 style="font-size:3rem;">⚡</h1>
+      <h3 style="color:#38bdf8;">JavaScript</h3>
+    </div>
+
+    <div class="card" style="text-align:center;background:linear-gradient(145deg,#0f172a,#1e293b);">
+      <h1 style="font-size:3rem;">🌐</h1>
+      <h3 style="color:#38bdf8;">HTML5</h3>
+    </div>
+
+    <div class="card" style="text-align:center;background:linear-gradient(145deg,#0f172a,#1e293b);">
+      <h1 style="font-size:3rem;">🎨</h1>
+      <h3 style="color:#38bdf8;">CSS3</h3>
+    </div>
+
+    <div class="card" style="text-align:center;background:linear-gradient(145deg,#0f172a,#1e293b);">
+      <h1 style="font-size:3rem;">⚛️</h1>
+      <h3 style="color:#38bdf8;">React</h3>
+    </div>
+
+    <div class="card" style="text-align:center;background:linear-gradient(145deg,#0f172a,#1e293b);">
+      <h1 style="font-size:3rem;">🟢</h1>
+      <h3 style="color:#38bdf8;">Node.js</h3>
+    </div>
+
+    <div class="card" style="text-align:center;background:linear-gradient(145deg,#0f172a,#1e293b);">
+      <h1 style="font-size:3rem;">🔥</h1>
+      <h3 style="color:#38bdf8;">Firebase</h3>
+    </div>
+
+    <div class="card" style="text-align:center;background:linear-gradient(145deg,#0f172a,#1e293b);">
+      <h1 style="font-size:3rem;">🗄️</h1>
+      <h3 style="color:#38bdf8;">MongoDB</h3>
+    </div>
+
+    <div class="card" style="text-align:center;background:linear-gradient(145deg,#0f172a,#1e293b);">
+      <h1 style="font-size:3rem;">🐘</h1>
+      <h3 style="color:#38bdf8;">PHP</h3>
+    </div>
+
+    <div class="card" style="text-align:center;background:linear-gradient(145deg,#0f172a,#1e293b);">
+      <h1 style="font-size:3rem;">☕</h1>
+      <h3 style="color:#38bdf8;">Java</h3>
+    </div>
+
+    <div class="card" style="text-align:center;background:linear-gradient(145deg,#0f172a,#1e293b);">
+      <h1 style="font-size:3rem;">💎</h1>
+      <h3 style="color:#38bdf8;">C++</h3>
+    </div>
+
+    <div class="card" style="text-align:center;background:linear-gradient(145deg,#0f172a,#1e293b);">
+      <h1 style="font-size:3rem;">🔷</h1>
+      <h3 style="color:#38bdf8;">TypeScript</h3>
+    </div>
+
+    <div class="card" style="text-align:center;background:linear-gradient(145deg,#0f172a,#1e293b);">
+      <h1 style="font-size:3rem;">🧠</h1>
+      <h3 style="color:#38bdf8;">AI Tools</h3>
+    </div>
+
+    <div class="card" style="text-align:center;background:linear-gradient(145deg,#0f172a,#1e293b);">
+      <h1 style="font-size:3rem;">🎬</h1>
+      <h3 style="color:#38bdf8;">Motion UI</h3>
+    </div>
+
+    <div class="card" style="text-align:center;background:linear-gradient(145deg,#0f172a,#1e293b);">
+      <h1 style="font-size:3rem;">📱</h1>
+      <h3 style="color:#38bdf8;">Responsive</h3>
+    </div>
+
+    <div class="card" style="text-align:center;background:linear-gradient(145deg,#0f172a,#1e293b);">
+      <h1 style="font-size:3rem;">🚀</h1>
+      <h3 style="color:#38bdf8;">SEO</h3>
+    </div>
+
+    <div class="card" style="text-align:center;background:linear-gradient(145deg,#0f172a,#1e293b);">
+      <h1 style="font-size:3rem;">🛡️</h1>
+      <h3 style="color:#38bdf8;">Cyber Security</h3>
+    </div>
+
+    <div class="card" style="text-align:center;background:linear-gradient(145deg,#0f172a,#1e293b);">
+      <h1 style="font-size:3rem;">🎮</h1>
+      <h3 style="color:#38bdf8;">Game UI</h3>
+    </div>
+
+    <div class="card" style="text-align:center;background:linear-gradient(145deg,#0f172a,#1e293b);">
+      <h1 style="font-size:3rem;">☁️</h1>
+      <h3 style="color:#38bdf8;">Cloud</h3>
+    </div>
+
+    <div class="card" style="text-align:center;background:linear-gradient(145deg,#0f172a,#1e293b);">
+      <h1 style="font-size:3rem;">🎯</h1>
+      <h3 style="color:#38bdf8;">UI/UX</h3>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <h2 style="font-size:2.5rem;color:#38bdf8;">Galereya</h2>
+
+  <div class="cards">
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085" style="width:100%;border-radius:15px;" />
+      <h3 style="margin-top:20px;">Modern Coding</h3>
+    </div>
+
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6" style="width:100%;border-radius:15px;" />
+      <h3 style="margin-top:20px;">Creative UI/UX</h3>
+    </div>
+
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1518770660439-4636190af475" style="width:100%;border-radius:15px;" />
+      <h3 style="margin-top:20px;">JavaScript Animation</h3>
+    </div>
+  </div>
+</section>
+
+
+
+<section>
+  <h2 style="font-size:2.8rem;color:#38bdf8;text-align:center;text-shadow:0 0 20px #38bdf8;">Jonli Statistika</h2>
+
+  <div style="display:flex;justify-content:center;gap:30px;flex-wrap:wrap;margin-top:50px;">
+
+    <div class="card" style="text-align:center;width:250px;background:linear-gradient(145deg,#0f172a,#1e293b);position:relative;overflow:hidden;">
+      <div style="position:absolute;width:200px;height:200px;background:rgba(56,189,248,0.1);border-radius:50%;top:-100px;right:-100px;"></div>
+      <h1 id="clients" style="font-size:4rem;color:#38bdf8;">75+</h1>
+      <p>Mamnun Mijozlar</p>
+    </div>
+
+    <div class="card" style="text-align:center;width:250px;background:linear-gradient(145deg,#0f172a,#1e293b);position:relative;overflow:hidden;">
+      <div style="position:absolute;width:200px;height:200px;background:rgba(56,189,248,0.1);border-radius:50%;bottom:-100px;left:-100px;"></div>
+      <h1 id="projects" style="font-size:4rem;color:#38bdf8;">37
+      
+      </h1>
+      <p>Loyihalar</p>
+    </div>
+
+    <div class="card" style="text-align:center;width:250px;background:linear-gradient(145deg,#0f172a,#1e293b);position:relative;overflow:hidden;">
+      <div style="position:absolute;width:200px;height:200px;background:rgba(56,189,248,0.1);border-radius:50%;top:-100px;left:-100px;"></div>
+      <h1 id="experience" style="font-size:4rem;color:#38bdf8;">17+</h1>
+      <p>Yillik Tajriba</p>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <h2 style="font-size:2.8rem;color:#38bdf8;text-align:center;text-shadow:0 0 20px #38bdf8;">Nega Aynan Men?</h2>
+
+  <div class="cards">
+
+    <div class="card" style="background:linear-gradient(145deg,#0f172a,#1e293b);">
+      <h1 style="font-size:3rem;">⚡</h1>
+      <h3 style="color:#38bdf8;">Tez Ishlash</h3>
+      <p>Optimized va juda tez ishlaydigan web saytlar.</p>
+    </div>
+
+    <div class="card" style="background:linear-gradient(145deg,#0f172a,#1e293b);">
+      <h1 style="font-size:3rem;">🛡️</h1>
+      <h3 style="color:#38bdf8;">Xavfsiz Tizim</h3>
+      <p>Xavfsiz va professional kod structure.</p>
+    </div>
+
+    <div class="card" style="background:linear-gradient(145deg,#0f172a,#1e293b);">
+      <h1 style="font-size:3rem;">🎯</h1>
+      <h3 style="color:#38bdf8;">Modern UI/UX</h3>
+      <p>Zamonaviy va premium dizayn tajribasi.</p>
+    </div>
+
+  </div>
+</section>
+
+<section id="social" style="order:99;"><h2 style="font-size:2.5rem;color:#38bdf8;text-align:center;">Ijtimoiy Tarmoqlar</h2>
+
+  <div class="cards">
+    <div class="card" style="text-align:center;position:relative;overflow:hidden;background:linear-gradient(145deg,#1e293b,#0f172a);border:1px solid rgba(56,189,248,0.3);box-shadow:0 0 40px rgba(56,189,248,0.25);">
+      <div style="position:absolute;width:150px;height:150px;background:rgba(56,189,248,0.15);border-radius:50%;top:-50px;right:-50px;filter:blur(20px);"></div>
+      <img src="https://cdn-icons-png.flaticon.com/512/2111/2111646.png" style="width:90px;filter:drop-shadow(0 0 20px #38bdf8);animation:spin 4s linear infinite;" />
+      <h3>Telegram</h3>
+      <p><a href="https://t.me/creative_web_design" target="_blank" style="color:#38bdf8;text-decoration:none;">@creative_web_design</a></p>
+    </div>
+
+    <div class="card" style="text-align:center;position:relative;overflow:hidden;background:linear-gradient(145deg,#1e293b,#0f172a);border:1px solid rgba(56,189,248,0.3);box-shadow:0 0 40px rgba(56,189,248,0.25);">
+      <div style="position:absolute;width:150px;height:150px;background:rgba(56,189,248,0.15);border-radius:50%;bottom:-50px;left:-50px;filter:blur(20px);"></div>
+      <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" style="width:90px;filter:drop-shadow(0 0 20px #38bdf8);animation:spin 4s linear infinite;" />
+      <h3>Instagram</h3>
+      <p><a href="https://instagram.com/creative.design" target="_blank" style="color:#38bdf8;text-decoration:none;">@creative.design</a></p>
+    </div>
+
+    <div class="card" style="text-align:center;position:relative;overflow:hidden;background:linear-gradient(145deg,#1e293b,#0f172a);border:1px solid rgba(56,189,248,0.3);box-shadow:0 0 40px rgba(56,189,248,0.25);">
+      <div style="position:absolute;width:150px;height:150px;background:rgba(56,189,248,0.15);border-radius:50%;top:-30px;left:-30px;filter:blur(20px);"></div>
+      <img src="https://cdn-icons-png.flaticon.com/512/733/733553.png" style="width:90px;filter:drop-shadow(0 0 20px #38bdf8);animation:spin 4s linear infinite;" />
+      <h3>GitHub</h3>
+      <p><a href="https://github.com/Aura57" target="_blank" style="color:#38bdf8;text-decoration:none;">github.com/Aura57</a></p>
+    </div>
+  </div>
+
+  <section>
+    <h2 style="font-size:2.8rem;color:#38bdf8;text-align:center;text-shadow:0 0 20px #38bdf8;">Men Bilan Bog'laning</h2>
+
+    <div style="display:flex;justify-content:center;gap:30px;flex-wrap:wrap;margin-top:50px;">
+      <a href="https://t.me/creative_web_design" target="_blank" style="width:90px;height:90px;border-radius:50%;background:#0f172a;display:flex;justify-content:center;align-items:center;box-shadow:0 0 30px rgba(56,189,248,0.5);transition:0.5s;">
+        <img src="https://cdn-icons-png.flaticon.com/512/2111/2111646.png" style="width:45px;">
+      </a>
+
+      <a href="https://instagram.com/creative.design" target="_blank" style="width:90px;height:90px;border-radius:50%;background:#0f172a;display:flex;justify-content:center;align-items:center;box-shadow:0 0 30px rgba(56,189,248,0.5);transition:0.5s;">
+        <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" style="width:45px;">
+      </a>
+
+      <a href="https://github.com/Aura57" target="_blank" style="width:90px;height:90px;border-radius:50%;background:#0f172a;display:flex;justify-content:center;align-items:center;box-shadow:0 0 30px rgba(56,189,248,0.5);transition:0.5s;">
+        <img src="https://cdn-icons-png.flaticon.com/512/733/733553.png" style="width:45px;">
+      </a>
+    </div>
+  </section>
+
+
+  
+ 
+
+<script>
+  function scrollToSection() {
+    window.scrollTo({
+      top: window.innerHeight,
+      behavior: 'smooth'
+    });
+  }
+
+  // Particle Background Animation
+  const canvas = document.getElementById('bg');
+  const ctx = canvas.getContext('2d');
+
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  let particles = [];
+
+  for(let i = 0; i < 100; i++) {
+    particles.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      r: Math.random() * 3,
+      dx: (Math.random() - 0.5) * 2,
+      dy: (Math.random() - 0.5) * 2
+    });
+  }
+
+  function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    particles.forEach(p => {
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = '#38bdf8';
+      ctx.fill();
+
+      p.x += p.dx;
+      p.y += p.dy;
+
+      if(p.x < 0 || p.x > canvas.width) p.dx *= -1;
+      if(p.y < 0 || p.y > canvas.height) p.dy *= -1;
+    });
+
+    requestAnimationFrame(animate);
+  }
+
+  animate();
+
+  window.addEventListener('resize', () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  });
+</script>
+
+
+<script>
+  // Typing Effect
+  const title = document.querySelector('h1');
+  const text = 'Creative Web Design';
+  let index = 0;
+  title.innerHTML = '';
+
+  function typeEffect() {
+    if(index < text.length) {
+      title.innerHTML += text.charAt(index);
+      index++;
+      setTimeout(typeEffect, 120);
+    }
+  }
+
+  typeEffect();
+
+  // Mouse Glow Effect
+  document.addEventListener('mousemove', e => {
+    const glow = document.createElement('div');
+    glow.style.position = 'fixed';
+    glow.style.left = e.clientX + 'px';
+    glow.style.top = e.clientY + 'px';
+    glow.style.width = '10px';
+    glow.style.height = '10px';
+    glow.style.borderRadius = '50%';
+    glow.style.background = '#38bdf8';
+    glow.style.pointerEvents = 'none';
+    glow.style.boxShadow = '0 0 20px #38bdf8';
+    glow.style.opacity = '0.8';
+    glow.style.zIndex = '999';
+    document.body.appendChild(glow);
+
+    setTimeout(() => {
+      glow.remove();
+    }, 300);
+  });
+
+  // Dynamic Cards Animation
+  const cards = document.querySelectorAll('.card');
+
+  window.addEventListener('scroll', () => {
+    cards.forEach(card => {
+      const cardTop = card.getBoundingClientRect().top;
+      if(cardTop < window.innerHeight - 100) {
+        card.style.transform = 'translateY(0)';
+        card.style.opacity = '1';
+      }
+    });
+  });
+
+  cards.forEach(card => {
+    card.style.transform = 'translateY(100px)';
+    card.style.opacity = '0';
+    card.style.transition = '1s';
+  });
+
+
+<script>
+  function scrollToTop() {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  }
+
+  // Navbar Active Background
+  window.addEventListener('scroll', () => {
+    const navbar = document.getElementById('navbar');
+
+    if(window.scrollY > 50) {
+      navbar.style.background = 'rgba(15,23,42,0.95)';
+      navbar.style.boxShadow = '0 0 30px rgba(56,189,248,0.5)';
+    } else {
+      navbar.style.background = 'rgba(15,23,42,0.7)';
+    }
+  });
+
+  // Da// Tungi / Kunduzgi Rejimnst modeBtn = document.createElement('button');
+  modeBmodeBtn.innerHTML = '🌙';
+  modeBtn.title = 'Tungi / Kunduzgi Rejim';deBtn.style.position = 'fixed';
+  modeBtn.style.bottom = '30px';
+  modeBtn.style.right = '30px';
+  modeBtn.style.width = '60px';
+  modeBtn.style.height = '60px';
+  modeBtn.style.borderRadius = '50%';
+  modeBtn.style.border = 'none';
+  modeBtn.style.fontSize = '1.5rem';
+  modeBtn.style.cursor = 'pointer';
+  modeBtn.style.background = '#38bdf8';
+  modeBtn.style.boxShadow = '0 0 30px #38bdf8';
+  modeBtn.style.zIndex = '9999';
+
+  document.body.appendChild(modeBtn);
+
+  let darkMode = true;
+
+  
+  // Counter Animation
+  function animateCounter(id, target) {
+    let count = 0;
+    const element = document.getElementById(id);
+
+    const interval = setInterval(() => {
+      count++;
+      element.innerText = count;
+
+      if(count >= target) {
+        clearInterval(interval);
+      }
+    }, 30);
+  }
+
+  animateCounter('clients', 33);
+  animateCounter('projects', 25);
+  animateCounter('experience', 17);
+
+  // Floating Background Circles
+  for(let i = 0; i < 15; i++) {
+    const circle = document.createElement('div');
+    circle.style.position = 'fixed';
+    circle.style.width = Math.random() * 60 + 'px';
+    circle.style.height = circle.style.width;
+    circle.style.borderRadius = '50%';
+    circle.style.background = 'rgba(56,189,248,0.08)';
+    circle.style.left = Math.random() * window.innerWidth + 'px';
+    circle.style.top = Math.random() * window.innerHeight + 'px';
+    circle.style.zIndex = '-1';
+    circle.style.animation = `spin ${Math.random()*20+10}s linear infinite`;
+    document.body.appendChild(circle);
+  }
+
+modeBtn.addEventListener('click', () => {
+    darkMode = !darkMode;
+
+    if(!darkMode) {
+      documdocument.body.style.background = '#f1f5f9';
+      document.body.style.color = '#0f172a';
+      document.querySelectorAll('.card').forEach(el => {
+        el.style.background = 'rgba(255,255,255,0.9)';
+      });  document.body.style.color = '#0f172a';
+      modeBtn.innerHTML = '☀️';
+    } else {
+      documdocument.body.style.background = '#0f172a';
+      document.body.style.color = 'white';
+      document.querySelectorAll('.card').forEach(el => {
+        el.style.background = '';
+      });  document.body.style.color = 'white';
+      modeBtn.innerHTML = '🌙';
+    
+  });
+</script>
+html id="l9d2vk"
+<script>
+window.addEventListener("DOMContentLoaded", () => {
+</script>
+```html id="x8q2la"
+<script>
+
+window.addEventListener("DOMContentLoaded", () => {
+
+    // =========================
+    // FOOTER CREATE
+    // =========================
+
+    const footer = document.createElement("footer");
+
+    footer.style.cssText = `
+        width:100%;
+        margin-top:120px;
+        padding:120px 20px;
+        background:linear-gradient(145deg,#020617,#0f172a);
+        position:relative;
+        overflow:hidden;
+        border-top:1px solid rgba(56,189,248,0.2);
+        text-align:center;
+    `;
+
+    footer.innerHTML = `
+
+        <!-- BLURS -->
+        <div class="blur blur1"></div>
+        <div class="blur blur2"></div>
+        <div class="blur blur3"></div>
+
+        <!-- TITLE -->
+        <h1 class="footerTitle">
+            Aura57
+        </h1>
+
+        <!-- TEXT -->
+        <p class="footerText">
+            Full Stack Developer • Creative UI Designer
+        </p>
+
+        <!-- LIVE CLOCK -->
+        <div class="clock">
+            00:00:00
+        </div>
+
+        <!-- SOCIAL -->
+        <div class="socialBox"></div>
+
+        <!-- MUSIC BAR -->
+        <div class="musicBars">
+
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+
+        </div>
+
+        <!-- LINE -->
+        <div class="footerLine"></div>
+
+        <!-- COPYRIGHT -->
+        <p class="copy"></p>
+
+        <!-- BUTTON -->
+        <button class="topBtn">
+            ↑
+        </button>
+
+    `;
+
+    document.body.appendChild(footer);
+
+    // =========================
+    // LIVE CLOCK
+    // =========================
+
+    const clock = footer.querySelector(".clock");
+
+    setInterval(() => {
+
+        const now = new Date();
+
+        let h = now.getHours().toString().padStart(2,"0");
+        let m = now.getMinutes().toString().padStart(2,"0");
+        let s = now.getSeconds().toString().padStart(2,"0");
+
+        clock.innerHTML = `${h}:${m}:${s}`;
+
+    },1000);
+
+    // =========================
+    // SOCIALS
+    // =========================
+
+    const socialBox = footer.querySelector(".socialBox");
+
+    socialBox.style.cssText = `
+        display:flex;
+        justify-content:center;
+        gap:35px;
+        flex-wrap:wrap;
+        margin-top:60px;
+    `;
+
+    const socials = [
+
+        {
+            link:"https://t.me/joni_21_08_",
+            icon:"https://cdn-icons-png.flaticon.com/512/2111/2111646.png"
+        },
+
+        {
+            link:"https://instagram.com/joni_21_08_",
+            icon:"https://cdn-icons-png.flaticon.com/512/2111/2111463.png"
+        },
+
+        {
+            link:"https://github.com/Aura57",
+            icon:"https://cdn-icons-png.flaticon.com/512/733/733553.png"
+        }
+
+    ];
+
+    socials.forEach(item => {
+
+        const a = document.createElement("a");
+
+        a.href = item.link;
+        a.target = "_blank";
+
+        a.style.cssText = `
+            width:110px;
+            height:110px;
+            border-radius:50%;
+            background:linear-gradient(145deg,#0f172a,#1e293b);
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            position:relative;
+            overflow:hidden;
+            transition:0.5s;
+            box-shadow:0 0 30px rgba(56,189,248,0.25);
+            border:1px solid rgba(56,189,248,0.15);
+            animation:float 3s ease-in-out infinite;
+        `;
+
+        // HOVER
+        a.addEventListener("mouseover", () => {
+
+            a.style.transform = "translateY(-15px) scale(1.12)";
+            a.style.boxShadow = "0 0 60px #38bdf8";
+
+        });
+
+        a.addEventListener("mouseout", () => {
+
+            a.style.transform = "scale(1)";
+            a.style.boxShadow = "0 0 30px rgba(56,189,248,0.25)";
+
+        });
+
+        // CLICK RIPPLE
+        a.addEventListener("click", () => {
+
+            const ripple = document.createElement("span");
+
+            ripple.style.cssText = `
+                position:absolute;
+                width:20px;
+                height:20px;
+                background:white;
+                border-radius:50%;
+                animation:ripple 0.7s linear;
+            `;
+
+            a.appendChild(ripple);
+
+            setTimeout(() => {
+
+                ripple.remove();
+
+            },700);
+
+        });
+
+        // ICON
+        const img = document.createElement("img");
+
+        img.src = item.icon;
+
+        img.style.cssText = `
+            width:52px;
+            z-index:2;
+        `;
+
+        a.appendChild(img);
+
+        socialBox.appendChild(a);
+
+    });
+
+    // =========================
+    // TOP BUTTON
+    // =========================
+
+    const topBtn = footer.querySelector(".topBtn");
+
+    topBtn.style.cssText = `
+        margin-top:50px;
+        width:75px;
+        height:75px;
+        border:none;
+        border-radius:50%;
+        background:#38bdf8;
+        color:black;
+        font-size:2rem;
+        cursor:pointer;
+        transition:0.5s;
+        box-shadow:0 0 40px #38bdf8;
+        font-weight:bold;
+    `;
+
+    topBtn.addEventListener("mouseover", () => {
+
+        topBtn.style.transform = "scale(1.2) rotate(360deg)";
+
+    });
+
+    topBtn.addEventListener("mouseout", () => {
+
+        topBtn.style.transform = "scale(1)";
+
+    });
+
+    topBtn.addEventListener("click", () => {
+
+        window.scrollTo({
+
+            top:0,
+            behavior:"smooth"
+
+        });
+
+    });
+
+    // =========================
+    // PARTICLES
+    // =========================
+
+    for(let i = 0; i < 80; i++){
+
+        const particle = document.createElement("div");
+
+        particle.style.cssText = `
+            position:absolute;
+            width:${Math.random()*10+4}px;
+            height:${Math.random()*10+4}px;
+            background:rgba(56,189,248,0.4);
+            border-radius:50%;
+            left:${Math.random()*100}%;
+            top:${Math.random()*100}%;
+            animation:particleMove ${Math.random()*10+5}s linear infinite;
+        `;
+
+        footer.appendChild(particle);
+
+    }
+
+    // =========================
+    // MOUSE LIGHT EFFECT
+    // =========================
+
+    footer.addEventListener("mousemove", (e) => {
+
+        const x = e.clientX;
+        const y = e.clientY;
+
+        footer.style.background = `
+            radial-gradient(
+                circle at ${x}px ${y}px,
+                rgba(56,189,248,0.15),
+                #020617 60%
+            )
+        `;
+
+    });
+
+    footer.addEventListener("mouseleave", () => {
+
+        footer.style.background = `
+            linear-gradient(145deg,#020617,#0f172a)
+        `;
+
+    });
+
+    // =========================
+    // DYNAMIC COPYRIGHT
+    // =========================
+
+    const copy = footer.querySelector(".copy");
+
+    copy.innerHTML = `
+        © ${new Date().getFullYear()} Barcha huquqlar himoyalangan
+    `;
+
+    // =========================
+    // STYLES
+    // =========================
+
+    const style = document.createElement("style");
+
+    style.innerHTML = `
+
+        .footerTitle{
+            font-size:4.5rem;
+            color:#38bdf8;
+            text-shadow:0 0 20px #38bdf8;
+            animation:glow 2s infinite alternate;
+        }
+
+        .footerText{
+            margin-top:15px;
+            color:#cbd5e1;
+            font-size:1.2rem;
+            letter-spacing:1px;
+        }
+
+        .clock{
+            margin-top:25px;
+            font-size:2rem;
+            color:#38bdf8;
+            text-shadow:0 0 20px #38bdf8;
+            font-weight:bold;
+            letter-spacing:4px;
+        }
+
+        .footerLine{
+            width:100%;
+            height:2px;
+            margin-top:70px;
+            background:linear-gradient(
+                90deg,
+                transparent,
+                #38bdf8,
+                transparent
+            );
+            animation:lineMove 3s linear infinite;
+        }
+
+        .copy{
+            margin-top:30px;
+            color:#94a3b8;
+            letter-spacing:3px;
+            font-size:1rem;
+        }
+
+        .musicBars{
+            display:flex;
+            justify-content:center;
+            align-items:flex-end;
+            gap:8px;
+            margin-top:50px;
+            height:50px;
+        }
+
+        .musicBars span{
+            width:8px;
+            background:#38bdf8;
+            border-radius:20px;
+            animation:music 1s infinite ease-in-out;
+        }
+
+        .musicBars span:nth-child(1){
+            animation-delay:0s;
+        }
+
+        .musicBars span:nth-child(2){
+            animation-delay:0.2s;
+        }
+
+        .musicBars span:nth-child(3){
+            animation-delay:0.4s;
+        }
+
+        .musicBars span:nth-child(4){
+            animation-delay:0.6s;
+        }
+
+        .musicBars span:nth-child(5){
+            animation-delay:0.8s;
+        }
+
+        .blur{
+            position:absolute;
+            border-radius:50%;
+            filter:blur(70px);
+        }
+
+        .blur1{
+            width:300px;
+            height:300px;
+            background:rgba(56,189,248,0.12);
+            top:-100px;
+            left:-100px;
+        }
+
+        .blur2{
+            width:260px;
+            height:260px;
+            background:rgba(56,189,248,0.08);
+            bottom:-100px;
+            right:-100px;
+        }
+
+        .blur3{
+            width:220px;
+            height:220px;
+            background:rgba(56,189,248,0.06);
+            top:120px;
+            right:200px;
+        }
+
+        @keyframes glow{
+
+            from{
+                text-shadow:0 0 10px #38bdf8;
+            }
+
+            to{
+                text-shadow:0 0 50px #38bdf8;
+            }
+
+        }
+
+        @keyframes lineMove{
+
+            0%{
+                transform:translateX(-100%);
+            }
+
+            100%{
+                transform:translateX(100%);
+            }
+
+        }
+
+        @keyframes ripple{
+
+            0%{
+                transform:scale(0);
+                opacity:1;
+            }
+
+            100%{
+                transform:scale(8);
+                opacity:0;
+            }
+
+        }
+
+        @keyframes float{
+
+            0%{
+                transform:translateY(0px);
+            }
+
+            50%{
+                transform:translateY(-12px);
+            }
+
+            100%{
+                transform:translateY(0px);
+            }
+
+        }
+
+        @keyframes particleMove{
+
+            0%{
+                transform:translateY(0px);
+                opacity:1;
+            }
+
+            100%{
+                transform:translateY(-100vh);
+                opacity:0;
+            }
+
+        }
+
+        @keyframes music{
+
+            0%{
+                height:10px;
+            }
+
+            50%{
+                height:50px;
+            }
+
+            100%{
+                height:10px;
+            }
+
+        }
+
+    `;
+
+    document.head.appendChild(style);
+
+});
+
+</script>
+```
+
+
+  
+```
+
+
+</body>
+</html>
