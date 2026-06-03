@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <title>Pinch Typing Ultimate - Jonibek</title>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils"></script>
+    <style>
+        body { margin: 0; background: #0a0a0a; color: white; font-family: 'Segoe UI', sans-serif; overflow: hidden; }
+        #container { position: relative; width: 100vw; height: 100vh; }
+        video { transform: rotateY(180deg); position: absolute; width: 100%; height: 100%; object-fit: cover; opacity: 0.25; }
+        canvas { position: absolute; width: 100%; height: 100%; transform: rotateY(180deg); z-index: 5; }
+        
+        #display-text {
+            position: absolute; top: 25px; left: 50%; transform: translateX(-50%);
+            background: rgba(20, 20, 20, 0.95); padding: 15px 45px; border-radius: 50px;
+            font-size: 38px; border: 2px solid #4b90ff; z-index: 10; min-width: 350px; 
+            text-align: center; box-shadow: 0 0 30px rgba(75, 144, 255, 0.4);
+        }
+
+        .keyboard {
+            position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%);
+            display: grid; grid-template-columns: repeat(10, 65px); gap: 10px;
+            background: rgba(255, 255, 255, 0.03); padding: 20px; border-radius: 25px;
+            backdrop-filter: blur(15px); z-index: 10; border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .key {
+            width: 65px; height: 65px; background: rgba(255, 255, 255, 0.08);
+            display: flex; justify-content: center; align-items: center;
+            font-size: 20px; font-weight: bold; border-radius: 12px; border: 1px solid #333;
+            transition: all 0.15s; color: #ccc; cursor: none;
+        }
+
+        .key.number { color: #ffcc00; border-color: rgba(255, 204, 0, 0.3); }
+        .key.backspace { width: 140px; grid-column: span 2; background: rgba(255, 82, 82, 0.15); border-color: #ff5252; color: #ff5252; }
+        .key.space { width: 140px; grid-column: span 2; }
+        .key.enter { width: 140px; grid-column: span 2; background: rgba(75, 255, 144, 0.15); border-color: #4bff90; color: #4bff90; }
+
+        .key.highlight { background: rgba(75, 144, 255, 0.25); border-color: #4b90ff; color: white; }
+        .key.pressed { background: #4b90ff; color: white; transform: scale(0.85); box-shadow: 0 0 35px #4b90ff; }
+        
+        #status-bar { position: absolute; bottom: 8px; width: 100%; text-align: center; color: #4b90ff; font-size: 14px; z-index: 10; }
+        .cursor { border-right: 3px solid #4b90ff; margin-left: 5px; animation: blink 1s infinite; }
+        @keyframes blink { 50% { opacity: 0; } }
+    </style>
+</head>
+<body>
+
+<div id="container">
+    <video id="input_video"></video>
+    <canvas id="output_canvas"></canvas>
+    <div id="display-text"><span id="typed-text"></span><span class="cursor"></span></div>
+    <div class="keyboard" id="virtual-keyboard"></div>
+    <div id="status-bar">ENTER ni bosing - hammasini o'qiydi</div>
+</div>
+
+<script>
+    const videoElement = document.getElementById('input_video');
+    const canvasElement = document.getElementById('output_canvas');
+    const canvasCtx = canvasElement.getContext('2d');
+    const typedTextElement = document.getElementById('typed-text');
+    const keyboardElement = document.getElementById('virtual-keyboard');
+
+    let typedText = "";
+    let isPinched = false;
+    let hoveredKey = null;
+
+    const layout = [
+        "1", "2", "3", "4", "5", "6", "7", "8", "9", "0",
+        "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P",
+        "A", "S", "D", "F", "G", "H", "J", "K", "L", "Z",
+        "X", "C", "V", "B", "N", "M", "DEL", "SPACE", "ENTER"
+    ];
+
+    layout.forEach(item => {
+        const keyDiv = document.createElement('div');
+        keyDiv.className = 'key';
+        if (!isNaN(item)) keyDiv.classList.add('number');
+        
+        if (item === "DEL") {
+            keyDiv.classList.add('backspace');
+            keyDiv.innerText = "DELETE";
+        } else if (item === "SPACE") {
+            keyDiv.classList.add('space');
+            keyDiv.innerText = "BO'SHLIQ";
+        } else if (item === "ENTER") {
+            keyDiv.classList.add('enter');
+            keyDiv.innerText = "ENTER";
+        } else {
+            keyDiv.innerText = item;
+        }
+        keyboardElement.appendChild(keyDiv);
+    });
+
+    function speak(text) {
+        const synth = window.speechSynthesis;
+        const utter = new SpeechSynthesisUtterance(text);
+        utter.lang = 'uz-UZ'; // O'zbek tili (brauzer qo'llab-quvvatlasa)
+        utter.rate = 1;
+        synth.speak(utter);
+    }
+
+    function handleKeyPress(keyElement) {
+        keyElement.classList.add('pressed');
+        const val = keyElement.innerText;
+
+        if (val === "DELETE") {
+            typedText = typedText.slice(0, -1);
+            speak("O'chirildi");
+        } else if (val === "BO'SHLIQ") {
+            typedText += " ";
+            speak("Joy");
+        } else if (val === "ENTER") {
+            if (typedText.length > 0) {
+                speak("Yozilgan matn: " + typedText);
+            } else {
+                speak("Matn mavjud emas");
+            }
+        } else {
+            typedText += val;
+            speak(val); // Har bir harfni aytadi
+        }
+        
+        typedTextElement.innerText = typedText;
+        setTimeout(() => keyElement.classList.remove('pressed'), 200);
+    }
+
+    function onResults(results) {
+        canvasCtx.save();
+        canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
+        if (results.multiHandLandmarks) {
+            for (const landmarks of results.multiHandLandmarks) {
+                const thumbTip = landmarks[4];
+                const indexTip = landmarks[8];
+                const tx = (1 - thumbTip.x) * window.innerWidth;
+                const ty = thumbTip.y * window.innerHeight;
+                const ix = (1 - indexTip.x) * window.innerWidth;
+                const iy = indexTip.y * window.innerHeight;
+                const distance = Math.sqrt(Math.pow(tx - ix, 2) + Math.pow(ty - iy, 2));
+                const midX = (tx + ix) / 2;
+                const midY = (ty + iy) / 2;
+
+                canvasCtx.fillStyle = distance < 40 ? "#00ff00" : "#4b90ff";
+                canvasCtx.beginPath();
+                canvasCtx.arc(midX, midY, 12, 0, 2 * Math.PI);
+                canvasCtx.fill();
+
+                updateHover(midX, midY);
+
+                if (distance < 40) {
+                    if (!isPinched && hoveredKey) {
+                        handleKeyPress(hoveredKey);
+                        isPinched = true;
+                    }
+                } else {
+                    isPinched = false;
+                }
+            }
+        }
+        canvasCtx.restore();
+    }
+
+    function updateHover(x, y) {
+        let currentHover = null;
+        document.querySelectorAll('.key').forEach(key => {
+            const rect = key.getBoundingClientRect();
+            if (x > rect.left && x < rect.right && y > rect.top && y < rect.bottom) {
+                currentHover = key;
+                key.classList.add('highlight');
+            } else {
+                key.classList.remove('highlight');
+            }
+        });
+        hoveredKey = currentHover;
+    }
+
+    const hands = new Hands({ locateFile: (file) => `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}` });
+    hands.setOptions({ maxNumHands: 1, modelComplexity: 1, minDetectionConfidence: 0.8, minTrackingConfidence: 0.8 });
+    hands.onResults(onResults);
+
+    const camera = new Camera(videoElement, {
+        onFrame: async () => { await hands.send({image: videoElement}); },
+        width: 1280, height: 720
+    });
+    camera.start();
+
+    window.addEventListener('resize', () => {
+        canvasElement.width = window.innerWidth;
+        canvasElement.height = window.innerHeight;
+    });
+    window.dispatchEvent(new Event('resize'));
+</script>
+
+</body>
+</html>
